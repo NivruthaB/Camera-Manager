@@ -1,0 +1,79 @@
+<div class="main-header">
+    <div class="main-logo">
+      <img src="..\..\assets\CameraManager5.png" alt="Camera Manager Logo" width="200px">
+    </div>
+    <div class="logout-button">
+        <button mat-button><div class="iconify" data-icon="mdi-logout" data-inline="false"></div>LOGOUT</button>
+    </div>
+</div>  
+<div class="main-content">
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">  
+      <!-- Position Column -->
+      <ng-container matColumnDef="cameraId">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.cameraId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="deviceTypeId">
+        <mat-header-cell *matHeaderCellDef> Device Type ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.deviceTypeId}} </mat-cell>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="ethMacAddress">
+        <mat-header-cell *matHeaderCellDef> MAC Address </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ethMacAddress}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="zoneId">
+        <mat-header-cell *matHeaderCellDef> Zone ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.zoneId}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="accountId">
+        <mat-header-cell *matHeaderCellDef> Account ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.accountId}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let detail"> 
+            <div *ngIf="expandedDetails != null && expandedDetails.length > 0">
+                <tr>Camera ID : {{expandedDetails[0].cameraId}}</tr> 
+                <tr>Online : {{expandedDetails[0].online}}</tr>
+                <tr>Recording On Cloud : {{expandedDetails[0].recordingOnCloud}}</tr>
+                <tr>Recording On Sd : {{expandedDetails[0].recordingOnSd}}</tr>
+                <tr>Audio Enabled : {{expandedDetails[0].audioEnabled}}</tr>
+                <tr>Password Known : {{expandedDetails[0].passwordKnown}}</tr>
+                <tr>Password Status : {{expandedDetails[0].passwordStatus}}</tr>
+            </div>
+            <div *ngIf="expandedDetails == null || expandedDetails.length == 0">
+                No Details present for this camera!
+            </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"
+            matRipple 
+            class="element-row" 
+            [class.expanded]="expandedElement == row"
+            (click)="expandedElement = row; filterDataAfterExpansion(row);"></mat-row>
+    <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+            [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+            style="overflow: hidden"> 
+    </mat-row>
+      <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  </div>

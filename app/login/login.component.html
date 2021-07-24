@@ -1,0 +1,43 @@
+<div class="background-full-page">
+<div class="main">
+    <mat-card class="login-card">
+    <mat-card-header> 
+      <mat-card-title><img mat-card-image src="..\..\assets\CameraManager5.png" alt="Camera Manager Logo" width="50" height="100"></mat-card-title>
+    </mat-card-header>    
+    <mat-card-content class="login-content">
+      <form [formGroup]="loginForm">
+        <mat-form-field class="login-form-inputs" appearance="fill">
+          <mat-label class="bg-input"><mat-icon>person_outline</mat-icon>&nbsp;&nbsp;Email</mat-label>
+          <input class="border-input" type="email" matInput formControlName="emailFormControl" placeholder="Ex. pat@example.com">
+          <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="login-form-inputs" appearance="fill">
+          <mat-label class="bg-input"><mat-icon>lock</mat-icon>&nbsp;&nbsp;Password</mat-label>
+          <input type="password" matInput formControlName="password" placeholder="Example1234$">
+          <!-- <mat-error *ngIf="password.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button class="primary-bg-color" (click)="authenticateLogin()">LOGIN</button>      
+    </mat-card-actions>
+    <div class="center">
+      <button class="forgot-password-link" mat-button (click)="forgotPassword()">Forgot Password?</button>
+    </div>
+  </mat-card>  
+  <mat-card class="login-side-card">
+    <mat-card-header> 
+      <mat-card-title></mat-card-title>
+    </mat-card-header>    
+    <mat-card-content class="login-content">
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
